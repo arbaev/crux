@@ -56,8 +56,14 @@ export default defineConfig((ctx) => {
 
       // rebuildCache: true, // rebuilds Vite/linter/etc cache on startup
 
-      // В dev раздаём с корня, в prod — из подпути GitHub Pages (/<repo>/).
-      publicPath: ctx.prod ? '/crux/' : '/',
+      // dev — корень; web/PWA prod — подпуть GitHub Pages (/crux/);
+      // capacitor/cordova — относительные пути (ассеты грузятся из локальной ФС внутри APK).
+      publicPath:
+        ctx.modeName === 'capacitor' || ctx.modeName === 'cordova'
+          ? ''
+          : ctx.prod
+            ? '/crux/'
+            : '/',
       // analyze: true,
       // env: {},
       // rawDefine: {}

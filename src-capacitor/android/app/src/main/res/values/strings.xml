@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Crux</string>
+    <string name="title_activity_main">Crux</string>
+    <string name="package_name">com.arbaev.crux</string>
+    <string name="custom_url_scheme">com.arbaev.crux</string>
+</resources>
