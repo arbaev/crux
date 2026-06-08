@@ -3,7 +3,16 @@
     <q-header elevated>
       <q-toolbar>
         <q-toolbar-title>{{ $t('appTitle') }}</q-toolbar-title>
-        <div class="text-caption">Quasar v{{ $q.version }}</div>
+        <q-btn
+          v-if="canInstall"
+          flat
+          dense
+          no-caps
+          icon="install_mobile"
+          :label="$t('pwa.install')"
+          @click="onInstall"
+        />
+        <div class="text-caption q-ml-sm">Quasar v{{ $q.version }}</div>
       </q-toolbar>
 
       <q-tabs align="left" no-caps inline-label>
@@ -19,3 +28,13 @@
     </q-page-container>
   </q-layout>
 </template>
+
+<script setup lang="ts">
+import { useInstallPrompt } from 'src/composables/useInstallPrompt';
+
+const { canInstall, promptInstall } = useInstallPrompt();
+
+function onInstall() {
+  void promptInstall();
+}
+</script>

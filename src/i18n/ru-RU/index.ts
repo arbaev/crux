@@ -84,6 +84,9 @@ const messages: Messages = {
     invalid: 'Неверная или повреждённая ссылка.',
     wrongBoard: 'Эта трасса собрана на доске другого размера.',
   },
+  pwa: {
+    install: 'Установить',
+  },
   notFound: {
     code: '404',
     message: 'Упс. Здесь ничего нет…',

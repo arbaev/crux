@@ -82,6 +82,9 @@ const enUS = {
     invalid: 'Invalid or broken link.',
     wrongBoard: 'This route was built on a different board size.',
   },
+  pwa: {
+    install: 'Install app',
+  },
   notFound: {
     code: '404',
     message: 'Oops. Nothing here…',

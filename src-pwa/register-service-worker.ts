@@ -1,41 +1,40 @@
 import { register } from 'register-service-worker';
+import { Notify } from 'quasar';
 
-// The ready(), registered(), cached(), updatefound() and updated()
-// events passes a ServiceWorkerRegistration instance in their arguments.
-// ServiceWorkerRegistration: https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration
-
+// Строки prompt-обновления — вне Vue-i18n (SW-регистрация), поэтому RU-хардкод.
 register(process.env.SERVICE_WORKER_FILE, {
-  // The registrationOptions object will be passed as the second argument
-  // to ServiceWorkerContainer.register()
-  // https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerContainer/register#Parameter
-
-  // registrationOptions: { scope: './' },
-
-  ready (/* registration */) {
-    // console.log('Service worker is active.')
+  // Доступна новая версия: мягкий prompt вместо молчаливой подмены (§11.3).
+  updated(registration) {
+    Notify.create({
+      message: 'Доступно обновление',
+      caption: 'Загрузите свежую версию приложения',
+      color: 'primary',
+      icon: 'system_update',
+      timeout: 0,
+      position: 'bottom',
+      actions: [
+        {
+          label: 'Обновить',
+          color: 'white',
+          handler: () => {
+            registration.waiting?.postMessage({ type: 'SKIP_WAITING' });
+          },
+        },
+        { label: 'Позже', color: 'white' },
+      ],
+    });
   },
 
-  registered (/* registration */) {
-    // console.log('Service worker has been registered.')
+  error(err) {
+    // Прогрессивное улучшение: сбой регистрации SW не ломает приложение.
+    console.error('Service worker registration failed:', err);
   },
+});
 
-  cached (/* registration */) {
-    // console.log('Content has been cached for offline use.')
-  },
-
-  updatefound (/* registration */) {
-    // console.log('New content is downloading.')
-  },
-
-  updated (/* registration */) {
-    // console.log('New content is available; please refresh.')
-  },
-
-  offline () {
-    // console.log('No internet connection found. App is running in offline mode.')
-  },
-
-  error (/* err */) {
-    // console.error('Error during service worker registration:', err)
-  },
+// Когда новый SW взял управление — один раз перезагружаем страницу на свежую версию.
+let refreshing = false;
+navigator.serviceWorker?.addEventListener('controllerchange', () => {
+  if (refreshing) return;
+  refreshing = true;
+  window.location.reload();
 });
