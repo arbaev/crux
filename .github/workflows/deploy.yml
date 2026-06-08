@@ -17,11 +17,22 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
+# Запускаем JS-actions на Node.js 24 (Node 20 в GitHub Actions deprecated, форс с 16.06.2026).
+# Официальный опт-ин — закрывает ворнинг сразу для всех actions без подбора версий.
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      # Включает GitHub Pages и выставляет источник = GitHub Actions (если ещё не включён).
+      # Если выдаёт ошибку прав — включи вручную: Settings → Pages → Source = GitHub Actions.
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - uses: pnpm/action-setup@v4
         with:
