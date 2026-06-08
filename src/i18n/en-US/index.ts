@@ -36,6 +36,37 @@ const enUS = {
     reset: 'Reset',
     count: 'Holds: {n}',
   },
+  toolbar: {
+    name: 'Name',
+    namePlaceholder: 'Route name',
+    save: 'Save',
+    new: 'New',
+    saved: 'Route saved',
+  },
+  grade: {
+    system: 'System',
+    value: 'Grade',
+    systemHint:
+      'Route difficulty scale. Font / V-scale are for bouldering (V-scale is the most intuitive: V0 easy → higher = harder), French is for roped climbing, Color / Custom is a free label.',
+    systems: {
+      font: 'Font',
+      v: 'V-scale',
+      french: 'French',
+      color: 'Color',
+      custom: 'Custom',
+    },
+  },
+  routes: {
+    untitled: 'Untitled',
+    holds: '{n} holds',
+    open: 'Open',
+    duplicate: 'Duplicate',
+    delete: 'Delete',
+    empty: 'No saved routes yet. Build one and hit Save.',
+    confirmDelete: 'Delete route “{name}”?',
+    deleted: 'Route deleted',
+    duplicated: 'Route duplicated',
+  },
   notFound: {
     code: '404',
     message: 'Oops. Nothing here…',

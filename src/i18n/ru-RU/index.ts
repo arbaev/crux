@@ -38,6 +38,37 @@ const messages: Messages = {
     reset: 'Сбросить',
     count: 'Зацепов: {n}',
   },
+  toolbar: {
+    name: 'Название',
+    namePlaceholder: 'Имя трассы',
+    save: 'Сохранить',
+    new: 'Новая',
+    saved: 'Трасса сохранена',
+  },
+  grade: {
+    system: 'Система',
+    value: 'Категория',
+    systemHint:
+      'Шкала сложности трассы. Font / V-scale — для боулдеринга (V-scale нагляднее: V0 легко → дальше сложнее), French — для лазания с верёвкой, Цвет / Своя — свободная пометка.',
+    systems: {
+      font: 'Font',
+      v: 'V-scale',
+      french: 'French',
+      color: 'Цвет',
+      custom: 'Своя',
+    },
+  },
+  routes: {
+    untitled: 'Без названия',
+    holds: 'Зацепов: {n}',
+    open: 'Открыть',
+    duplicate: 'Дублировать',
+    delete: 'Удалить',
+    empty: 'Сохранённых трасс пока нет. Соберите трассу и нажмите «Сохранить».',
+    confirmDelete: 'Удалить трассу «{name}»?',
+    deleted: 'Трасса удалена',
+    duplicated: 'Трасса продублирована',
+  },
   notFound: {
     code: '404',
     message: 'Упс. Здесь ничего нет…',

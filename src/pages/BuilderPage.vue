@@ -1,20 +1,25 @@
 <template>
   <q-page class="builder">
-    <div class="builder__board">
-      <BoardCanvas editable />
-    </div>
+    <RouteToolbar />
 
-    <aside class="builder__panel">
-      <BrushPalette />
-      <div class="builder__count text-caption text-grey-7">
-        {{ $t('builder.count', { n: routeStore.count }) }}
+    <div class="builder__content">
+      <div class="builder__board">
+        <BoardCanvas editable />
       </div>
-    </aside>
+
+      <aside class="builder__panel">
+        <BrushPalette />
+        <div class="builder__count text-caption text-grey-7">
+          {{ $t('builder.count', { n: routeStore.count }) }}
+        </div>
+      </aside>
+    </div>
   </q-page>
 </template>
 
 <script setup lang="ts">
 import { useRouteStore } from 'src/stores/route';
+import RouteToolbar from 'components/RouteToolbar.vue';
 import BoardCanvas from 'components/BoardCanvas.vue';
 import BrushPalette from 'components/BrushPalette.vue';
 
@@ -22,11 +27,16 @@ const routeStore = useRouteStore();
 </script>
 
 <style scoped>
-/* q-page уже имеет min-height (вьюпорт минус хедер) — делаем его flex-контейнером,
-   тогда доска растягивается на всю доступную высоту, а canvas резайзится под неё. */
+/* q-page (min-height = вьюпорт минус хедер) — flex-колонка: тулбар сверху, ниже доска+палитра. */
 .builder {
   display: flex;
+  flex-direction: column;
+}
+.builder__content {
+  flex: 1 1 auto;
+  display: flex;
   flex-direction: row;
+  min-height: 0;
 }
 .builder__board {
   flex: 1 1 auto;
@@ -47,7 +57,7 @@ const routeStore = useRouteStore();
 
 /* Мобильный: доска сверху, палитра снизу. */
 @media (max-width: 1023px) {
-  .builder {
+  .builder__content {
     flex-direction: column;
   }
   .builder__panel {
