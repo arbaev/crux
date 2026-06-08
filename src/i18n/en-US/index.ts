@@ -25,6 +25,17 @@ const enUS = {
       placeholder: 'Crux — a climbing route builder. TypeScript · Quasar · Three.js.',
     },
   },
+  brush: {
+    start: 'Start',
+    hand: 'Hand',
+    foot: 'Foot',
+    finish: 'Top',
+    erase: 'Erase',
+  },
+  builder: {
+    reset: 'Reset',
+    count: 'Holds: {n}',
+  },
   notFound: {
     code: '404',
     message: 'Oops. Nothing here…',

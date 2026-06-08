@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Конструктор скалолазных трасс",
   "productName": "Crux",
-  "author": "Tim Arbaev <timbrk@gmail.com>",
+  "author": "Timur Arbaev <timbrk@gmail.com>",
   "type": "module",
   "private": true,
   "scripts": {

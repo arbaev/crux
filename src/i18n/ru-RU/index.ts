@@ -27,6 +27,17 @@ const messages: Messages = {
       placeholder: 'Crux — конструктор скалолазных трасс. TypeScript · Quasar · Three.js.',
     },
   },
+  brush: {
+    start: 'Старт',
+    hand: 'Рука',
+    foot: 'Нога',
+    finish: 'Топ',
+    erase: 'Стереть',
+  },
+  builder: {
+    reset: 'Сбросить',
+    count: 'Зацепов: {n}',
+  },
   notFound: {
     code: '404',
     message: 'Упс. Здесь ничего нет…',
