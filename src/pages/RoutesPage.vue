@@ -15,24 +15,41 @@
         @open="onOpen"
         @duplicate="onDuplicate"
         @delete="onDelete"
+        @share="onShare"
       />
     </div>
+
+    <ShareDialog
+      v-model="shareOpen"
+      :holds="shareRoute?.holds ?? []"
+      :name="shareRoute?.name ?? ''"
+      :grade="shareRoute?.grade ?? ''"
+    />
   </q-page>
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useQuasar } from 'quasar';
 import { useI18n } from 'vue-i18n';
 import type { Route } from 'src/types/board';
 import { useRouteStore } from 'src/stores/route';
 import RouteCard from 'components/RouteCard.vue';
+import ShareDialog from 'components/ShareDialog.vue';
 
 const router = useRouter();
 const $q = useQuasar();
 const { t } = useI18n();
 const routeStore = useRouteStore();
+
+const shareOpen = ref(false);
+const shareRoute = ref<Route | null>(null);
+
+function onShare(route: Route) {
+  shareRoute.value = route;
+  shareOpen.value = true;
+}
 
 onMounted(() => {
   void routeStore.loadSavedRoutes();

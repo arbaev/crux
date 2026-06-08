@@ -92,6 +92,18 @@ export const useRouteStore = defineStore('route', () => {
     revision.value++;
   }
 
+  // Импорт раскладки из расшаренной ссылки: новая несохранённая трасса (currentId=null).
+  function loadFromPayload(holds: RouteHold[], importedName = '', importedGrade = '') {
+    name.value = importedName;
+    grade.value = importedGrade;
+    gradeSystem.value = 'font';
+    currentId.value = null;
+    const m = new Map<string, HoldRole>();
+    for (const h of holds) m.set(h.holdId, h.role);
+    holdRoles.value = m;
+    revision.value++;
+  }
+
   async function removeRoute(id: string) {
     await dbDeleteRoute(id);
     if (currentId.value === id) newRoute();
@@ -140,6 +152,7 @@ export const useRouteStore = defineStore('route', () => {
     loadSavedRoutes,
     saveCurrent,
     loadRoute,
+    loadFromPayload,
     removeRoute,
     duplicateRoute,
     newRoute,

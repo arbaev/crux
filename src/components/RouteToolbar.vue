@@ -18,20 +18,40 @@
 
     <div class="route-toolbar__actions">
       <q-btn color="primary" icon="save" :label="$t('toolbar.save')" no-caps @click="onSave" />
+      <q-btn
+        flat
+        icon="share"
+        :label="$t('share.title')"
+        no-caps
+        :disable="routeStore.count === 0"
+        @click="shareOpen = true"
+      />
       <q-btn flat icon="add" :label="$t('toolbar.new')" no-caps @click="routeStore.newRoute()" />
     </div>
+
+    <ShareDialog
+      v-model="shareOpen"
+      :holds="shareHolds"
+      :name="routeStore.name"
+      :grade="routeStore.grade"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
+import { computed, ref } from 'vue';
 import { useQuasar } from 'quasar';
 import { useI18n } from 'vue-i18n';
 import { useRouteStore } from 'src/stores/route';
 import GradeSelector from 'components/GradeSelector.vue';
+import ShareDialog from 'components/ShareDialog.vue';
 
 const $q = useQuasar();
 const { t } = useI18n();
 const routeStore = useRouteStore();
+
+const shareOpen = ref(false);
+const shareHolds = computed(() => routeStore.serializeHolds());
 
 async function save() {
   await routeStore.saveCurrent();

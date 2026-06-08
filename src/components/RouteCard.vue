@@ -32,6 +32,7 @@
         :title="$t('routes.duplicate')"
         @click="emit('duplicate', route)"
       />
+      <q-btn flat dense icon="share" :title="$t('routes.share')" @click="emit('share', route)" />
       <q-btn
         flat
         dense
@@ -56,6 +57,7 @@ const emit = defineEmits<{
   open: [route: Route];
   duplicate: [route: Route];
   delete: [route: Route];
+  share: [route: Route];
 }>();
 
 const board = useBoardStore();
